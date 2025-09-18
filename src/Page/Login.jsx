@@ -8,8 +8,8 @@ const Login = () => {
   };
   return (
     <div className="flex justify-center mt-30">
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <div className="card-body">
+      <div className="card bg-base-100 w-full max-w-sm shrink-0 rounded-lg shadow-2xl">
+        <div className="card-body bg-[#49A010] rounded-2xl">
           <h1 className="text-center font-bold text-3xl">Login</h1>
           <form onSubmit={handleSubmit}>
             <label className="label">Email</label>
@@ -26,7 +26,7 @@ const Login = () => {
               className="input"
               placeholder="Password"
             />
-            <div>
+            <div className='my-3'>
               <a className="link link-hover">Forgot password?</a>
             </div>
             <input className="btn w-full mt-3" type="submit" value="Login" />
