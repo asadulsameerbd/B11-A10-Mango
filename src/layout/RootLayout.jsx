@@ -3,7 +3,7 @@ import Header from "../Component/Header";
 
 const RootLayout = () => {
     return (
-        <div className="text-center">
+        <div>
             <Header></Header>
             <Outlet></Outlet>
         </div>
