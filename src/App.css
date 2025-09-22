@@ -9,3 +9,13 @@ input {
 .active {
   color: greenyellow;
 }
+
+option {
+  color: white;
+}
+
+select {
+  background-color: #1d232a;
+  padding: 10px;
+  border: 1px solid rgb(82, 82, 82);
+}
