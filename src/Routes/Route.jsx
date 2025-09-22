@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layout/RootLayout";
+import Addplant from "../Page/Addplant";
 import Homepage from "../Page/Homepage";
 import Login from "../Page/Login";
 import Register from "../Page/Register";
@@ -17,8 +18,12 @@ export const router = createBrowserRouter([
                 Component : Login,
             },
             {
-                path :"/register",
+                path : "/register",
                 Component : Register,
+            },
+            {
+                path : "/addplant",
+                Component : Addplant,
             }
         ])
     }

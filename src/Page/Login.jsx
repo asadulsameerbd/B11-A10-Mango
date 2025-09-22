@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -7,7 +9,7 @@ const Login = () => {
     console.log(formUser);
   };
   return (
-    <div className="flex justify-center mt-30">
+    <div className="flex justify-center my-30 ">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 rounded-lg shadow-2xl">
         <div className="card-body bg-[#49A010] rounded-2xl">
           <h1 className="text-center font-bold text-3xl">Login</h1>
@@ -26,10 +28,16 @@ const Login = () => {
               className="input"
               placeholder="Password"
             />
-            <div className='my-3'>
+            <div className="my-3">
               <a className="link link-hover">Forgot password?</a>
             </div>
             <input className="btn w-full mt-3" type="submit" value="Login" />
+            <p>
+              Don't have an Account,{" "}
+              <Link className="underline font-semibold text-green-900" to={"/register"}>
+                Register
+              </Link>
+            </p>
           </form>
         </div>
       </div>
