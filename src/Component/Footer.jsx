@@ -1,48 +1,21 @@
-import { NavLink } from "react-router";
+import { Link } from "react-router";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
     <div>
       <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
-        <ul className="gap-5 hidden text-lg md:flex items-center">
-          <li>
-            <NavLink
-              className={
-                "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
-              }
-              to={"/"}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={
-                "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
-              }
-            >
-              All Plants
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={
-                "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
-              }
-            >
-              Add Plant
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={
-                "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
-              }
-            >
-              My Plants
-            </NavLink>
-          </li>
-        </ul>
+        {/* website name and contact info */}
+        <div>
+          <div>
+            <Link to={"/"}>
+              <button className="flex items-center justify-center gap-2">
+                <img className="w-15" src={logo} alt="" />
+                <p className="font-semibold text-lg">Pcare</p>
+              </button>
+            </Link>
+          </div>
+        </div>
         <nav>
           <div className="grid grid-flow-col gap-4">
             <a>

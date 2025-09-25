@@ -1,12 +1,32 @@
 import { use, useState } from "react";
 import { Link, NavLink } from "react-router";
+import Swal from "sweetalert2";
 import "../App.css";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Header = () => {
-  const { user, setUser } = use(AuthContext);
+  const { user, setUser, logOut } = use(AuthContext);
   const [open, setOpen] = useState(false);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "User Logout successfully!",
+          icon: "success",
+          draggable: true,
+        });
+      })
+      .catch((error) => {
+       Swal.fire({
+          title: error.message,
+          icon: "error",
+          draggable: true,
+        });
+      });
+  };
+
   return (
     <div className="bg-base-100 shadow-lg">
       <div className="max-w-[1380px] mx-auto flex navbar justify-between ">
@@ -22,18 +42,44 @@ const Header = () => {
         {/* Page list */}
         <ul className="gap-5 hidden text-lg md:flex items-center">
           <li>
-            <NavLink className={"relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"} to={'/'}>Home</NavLink>
+            <NavLink
+              className={
+                "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
+              }
+              to={"/"}
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink className={"relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"} >All Plants</NavLink>
+            <NavLink
+              className={
+                "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
+              }
+              to={"/allplant"}
+            >
+              All Plants
+            </NavLink>
           </li>
           <li>
-            <NavLink className={"relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"} 
-            to={'/addplant'}
-            >Add Plant</NavLink>
+            <NavLink
+              className={
+                "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
+              }
+              to={"/addplant"}
+            >
+              Add Plant
+            </NavLink>
           </li>
           <li>
-            <NavLink className={"relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"}>My Plants</NavLink>
+            <NavLink
+              className={
+                "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
+              }
+              to={"/myplant"}
+            >
+              My Plants
+            </NavLink>
           </li>
 
           {/* Dynamic User */}
@@ -49,9 +95,7 @@ const Header = () => {
                     />
 
                     {/* email tooltip */}
-                    <div
-                      className="absolute w-35 group-hover:opacity-60 opacity-0"
-                    >
+                    <div className="absolute w-35 group-hover:opacity-60 opacity-0">
                       {user.name}
                     </div>
                   </div>
@@ -59,11 +103,12 @@ const Header = () => {
 
                 {/* if Open  */}
                 {open && (
-                  <div className="absolute top-18">
+                  <div className="absolute right-2 top-18 z-10">
                     <div className="">
                       <button
                         className="btn hover:bg-green-700 bg-green-500 rounded-xl"
                         type="button"
+                        onClick={handleLogout}
                       >
                         Logout
                       </button>
@@ -72,19 +117,29 @@ const Header = () => {
                 )}
               </div>
             </div>
-          ) 
-          
-          : 
+          ) : (
+            // if user is not available then
 
-          // if user is not available then 
-          
-          (
             <div className="flex gap-5">
               <li>
-                <NavLink className={"relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"} to={"/login"}>Login</NavLink>
+                <NavLink
+                  className={
+                    "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
+                  }
+                  to={"/login"}
+                >
+                  Login
+                </NavLink>
               </li>
               <li>
-                <NavLink className={"relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"} to={"/register"}>Register</NavLink>
+                <NavLink
+                  className={
+                    "relative after:content-[''] after:absolute after:-bottom-1 after:w-0 after:left-0 after:h-[2px] after:bg-amber-300 after:transition-all after:duration-300 hover:after:w-full"
+                  }
+                  to={"/register"}
+                >
+                  Register
+                </NavLink>
               </li>
             </div>
           )}

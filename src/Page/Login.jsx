@@ -1,12 +1,39 @@
-import { Link } from "react-router";
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
+  const { loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const Form = e.target;
-    const logUser = new FormData(Form);
-    const formUser = Object.fromEntries(logUser.entries());
-    console.log(formUser);
+    const email = Form.email.value;
+    const password = Form.password.value;
+    // user login to firebase
+
+    loginUser(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        Swal.fire({
+          title: `${user.displayName || user.email} login successfully!` ,
+          icon: "success",
+          draggable: true,
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: error.message,
+          icon: "error",
+          draggable: true,
+        });
+      });
   };
   return (
     <div className="flex justify-center my-30 ">
@@ -34,7 +61,10 @@ const Login = () => {
             <input className="btn w-full mt-3" type="submit" value="Login" />
             <p>
               Don't have an Account,{" "}
-              <Link className="underline font-semibold text-green-900" to={"/register"}>
+              <Link
+                className="underline font-semibold text-green-900"
+                to={"/register"}
+              >
                 Register
               </Link>
             </p>

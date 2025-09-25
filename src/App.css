@@ -19,3 +19,8 @@ select {
   padding: 10px;
   border: 1px solid rgb(82, 82, 82);
 }
+
+th {
+  color: #49a010;
+  font-size: 20px;
+}
