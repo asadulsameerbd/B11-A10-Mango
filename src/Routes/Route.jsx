@@ -5,13 +5,16 @@ import Allplant from "../Page/Allplant";
 import Homepage from "../Page/Homepage";
 import Login from "../Page/Login";
 import Myplant from "../Page/Myplant";
+import NoRoute404 from "../Page/NoRoute404";
 import Register from "../Page/Register";
+import UpdatePlant from "../Page/UpdatePlant";
 import ViewPlant from "../Page/ViewPlant";
 
 export const router = createBrowserRouter([
     {
         path : "/",
         Component : RootLayout,
+        errorElement : <NoRoute404></NoRoute404>,
         children : ([
             {
                 index : true, Component : Homepage,
@@ -37,6 +40,11 @@ export const router = createBrowserRouter([
                 path : "/allplant/:id",
                 Component : ViewPlant,
                 loader : ({params})=>fetch(`http://localhost:3000/clients/${params.id}`)
+            },
+            {
+                path : "/updateplant/:id",
+                Component : UpdatePlant,
+                loader : ({params})=> fetch(`http://localhost:3000/clients/${params.id}`)
             },
             {
                 path : "/myplant",

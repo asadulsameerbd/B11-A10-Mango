@@ -15,17 +15,17 @@ const Homepage = () => {
       <Swiper navigation={true} modules={[Navigation,Autoplay]} autoplay={{delay:3000}}>
         <SwiperSlide>
             <div>
-                <img className="w-full h-[800px] rounded-2xl" src={banner1} alt="" />
+                <img className="w-full h-[250px] md:h-[500px] lg:h-[800px] object-cover rounded-2xl" src={banner1} alt="" />
             </div>
         </SwiperSlide>
         <SwiperSlide>
             <div>
-                <img className="w-full h-[800px] rounded-2xl" src={banner2} alt="" />
+                <img className="w-full h-[250px] md:h-[500px] lg:h-[800px] object-cover rounded-2xl" src={banner2} alt="" />
             </div>
         </SwiperSlide>
         <SwiperSlide>
             <div>
-                <img className="w-full h-[800px] rounded-2xl" src={banner3} alt="" />
+                <img className="w-full h-[250px] md:h-[500px] lg:h-[800px] object-cover rounded-2xl" src={banner3} alt="" />
             </div>
         </SwiperSlide>
         

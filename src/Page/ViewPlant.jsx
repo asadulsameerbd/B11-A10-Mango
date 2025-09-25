@@ -1,59 +1,100 @@
-import { useLoaderData, useNavigate } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const ViewPlant = () => {
   const data = useLoaderData();
   const navigate = useNavigate();
+
+  // handle delete plants
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/clients/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your plant has been deleted.",
+                icon: "success",
+              });
+              navigate("/allplant");
+            }
+          });
+      }
+    });
+  };
+
   return (
-    <div className="py-20">
-      <div className="card card-side p-10 flex justify-between bg-base-100 shadow-sm">
+    <div className="py-10 px-4 md:px-10">
+      <div className="card bg-base-100 shadow-sm flex flex-col md:flex-row md:items-start gap-6 p-6 rounded-2xl">
         {/* image */}
-        <figure className="">
-          <img className="rounded-2xl" src={data.photo} alt="Movie" />
+        <figure className="flex-shrink-0 mx-auto md:mx-0">
+          <img
+            className="rounded-2xl w-full max-w-[250px] object-cover"
+            src={data.photo}
+            alt="Photo"
+          />
         </figure>
 
         {/* text */}
-        <div className=" w-full pl-5 pt-2 flex flex-col gap-3">
-          <h2 className="flex justify-start gap-2">
-            <span className="text-green-500"> Plant Name: </span>
+        <div className="flex-1 flex flex-col gap-3">
+          <h2 className="text-lg md:text-xl font-semibold">
+            <span className="text-green-500">Plant Name: </span>
             {data.plant}
           </h2>
-          <p className="flex justify-start gap-2">
-            <span className="text-green-500">Description :</span>
+          <p>
+            <span className="text-green-500">Description: </span>
             {data.description}
           </p>
-          <p className="flex justify-start gap-2">
-            <span className="text-green-500">Category : </span>
+          <p>
+            <span className="text-green-500">Category: </span>
             {data.category}
           </p>
-          <p className="flex justify-start gap-2">
-            <span className="text-green-500">Watering Frequency : </span>
+          <p>
+            <span className="text-green-500">Watering Frequency: </span>
             {data.waterf}
           </p>
-          <p className="flex justify-start gap-2">
-            <span className="text-green-500"> Last Watered Date : </span>
+          <p>
+            <span className="text-green-500">Last Watered Date: </span>
             {data.lastwater}
           </p>
-          <p className="flex justify-start gap-2">
-            <span className="text-green-500"> Next Watering Date : </span>
+          <p>
+            <span className="text-green-500">Next Watering Date: </span>
             {data.nextwater}
           </p>
         </div>
-        {/* btn */}
-        <div className="pt-5">
-          <div className="join join-vertical gap-3">
-            <button
-              onClick={() => navigate(-1)}
-              className="btn text-green-400 hover:bg-green-600 hover:text-black rounded-xl join-item"
-            >
-              Back
-            </button>
-            <button className="btn text-green-400 hover:bg-green-600 hover:text-black rounded-xl join-item">
-              Edit
-            </button>
-            <button className="btn text-green-400 hover:bg-green-600 hover:text-black rounded-xl join-item">
-              Delete
-            </button>
-          </div>
+
+        {/* buttons */}
+        <div className="flex md:flex-col gap-3 justify-center md:justify-start">
+          <button
+            onClick={() => navigate(-1)}
+            className="btn text-green-400 hover:bg-green-600 hover:text-black rounded-xl"
+          >
+            Back
+          </button>
+          <Link
+            to={`/updateplant/${data._id}`}
+            className="btn text-green-400 hover:bg-green-600 hover:text-black rounded-xl"
+          >
+            Edit
+          </Link>
+          <button
+            onClick={() => handleDelete(data._id)}
+            className="btn text-green-400 hover:bg-green-600 hover:text-black rounded-xl"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

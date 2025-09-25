@@ -16,6 +16,8 @@ const Footer = () => {
             </Link>
           </div>
         </div>
+
+        {/* social */}
         <nav>
           <div className="grid grid-flow-col gap-4">
             <a>
@@ -54,9 +56,11 @@ const Footer = () => {
           </div>
         </nav>
         <aside>
+          {/* address contact */}
+
+          <p>Address : Ashulia, Savar, Dhaka, Bangladesh</p>
           <p>
-            Copyright © {new Date().getFullYear()} - All right reserved by ACME
-            Industries Ltd
+            Copyright © {new Date().getFullYear()} - All right reserved by WebbuzzBD
           </p>
         </aside>
       </footer>

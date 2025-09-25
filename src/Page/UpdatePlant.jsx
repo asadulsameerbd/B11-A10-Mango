@@ -1,49 +1,47 @@
-import { useContext } from "react";
+import { Link, useLoaderData } from "react-router";
 import Swal from "sweetalert2";
-import background from "../assets/background.jpg";
-import { AuthContext } from "../Provider/AuthProvider";
-const Addplant = () => {
-  const { user, setUser } = useContext(AuthContext);
 
-  // submit btn
+const UpdatePlant = () => {
+  const plant = useLoaderData();
+
+  // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const form = e.target;
-    const newform = new FormData(form);
-    const restFormData = Object.fromEntries(newform.entries());
+    const formData = new FormData(form);
+    const updateUser = Object.fromEntries(formData.entries());
+    console.log(updateUser);
 
-    const formdata = {
-      ...restFormData,
-    };
+    // fetch update
 
-    // add formdata to the server database
-
-    fetch("http://localhost:3000/clients", {
-      method: "POST",
+    fetch(`http://localhost:3000/clients/${plant._id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(formdata),
+      body: JSON.stringify(updateUser),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        if (data.modifiedCount) {
           Swal.fire({
-            position: "center",
+            title: "Your Plant is Updated Sucessfully!",
             icon: "success",
-            title: "Your Plant Added successfully",
-            showConfirmButton: false,
-            timer: 1500,
+            draggable: true,
+          });
+        }
+        if (data.modifiedCount == 0) {
+          Swal.fire({
+            title: "Your Plant is Already Updated ",
+            icon: "error",
+            draggable: true,
           });
         }
       });
   };
-
   return (
-    <div
-      className="object-cover bg-center py-30 bg-cover bg-no-repeat"
-      style={{ backgroundImage: `url(${background})` }}
-    >
+    <div className="object-cover bg-center pt-8 pb-15 bg-cover bg-no-repeat">
       <div className="flex justify-center flex-col items-center">
         <h1 className="text-center text-4xl font-semibold py-10">
           Add A New Plant
@@ -63,7 +61,7 @@ const Addplant = () => {
                 name="plant"
                 className="input"
                 placeholder="Plant Name "
-                required
+                defaultValue={plant.plant}
               />
             </fieldset>
 
@@ -74,7 +72,7 @@ const Addplant = () => {
                 name="photo"
                 className="input"
                 placeholder="photo url"
-                required
+                defaultValue={plant.photo}
               />
             </fieldset>
 
@@ -86,21 +84,21 @@ const Addplant = () => {
                 name="description"
                 className="input"
                 placeholder="Description"
-                required
+                defaultValue={plant.description}
               />
             </fieldset>
 
             {/* 3 */}
             <fieldset className="fieldset">
               <legend className="fieldset-legend">
-                Category (e.g., succulent, fern, flowering){" "}
+                Category (e.g., succulent, fern, flowering)
               </legend>
               <input
                 type="text"
                 name="category"
                 className="input"
                 placeholder="Enter Category"
-                required
+                defaultValue={plant.category}
               />
             </fieldset>
 
@@ -108,7 +106,7 @@ const Addplant = () => {
 
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Care Level</legend>
-              <select name="care" >
+              <select name="care" id="" defaultValue={plant.care}>
                 <option name="care" value="easy">
                   Easy
                 </option>
@@ -131,20 +129,30 @@ const Addplant = () => {
                 name="waterf"
                 className="input"
                 placeholder="Watering Frequency"
-                required
+                defaultValue={plant.waterf}
               />
             </fieldset>
 
             {/* 6 */}
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Last Watered Date</legend>
-              <input type="date" name="lastwater" className="input" required />
+              <input
+                type="date"
+                name="lastwater"
+                className="input"
+                defaultValue={plant.lastwater}
+              />
             </fieldset>
 
             {/* 7 */}
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Next Watering Date</legend>
-              <input type="date" name="nextwater" className="input" required />
+              <input
+                type="date"
+                name="nextwater"
+                className="input"
+                defaultValue={plant.nextwater}
+              />
             </fieldset>
 
             {/* 8 */}
@@ -155,22 +163,26 @@ const Addplant = () => {
                 name="health"
                 className="input"
                 placeholder="Health Status"
-                required
+                defaultValue={plant.health}
               />
             </fieldset>
 
             {/* hidden info */}
           </div>
-          <input type="hidden" name="userEmail" value={user?.email || ""} />
-          <input type="hidden" name="userName" value={user?.name || ""} />
 
           {/* submit btn */}
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-5">
             <input
               className="btn bg-[#49A010] w-30 hover:bg-green-900 rounded"
               type="submit"
               value="Add Plant"
             />
+            <Link
+              to={-1}
+              className="btn bg-[#49A010] w-30 hover:bg-green-900 rounded"
+            >
+              back
+            </Link>
           </div>
         </form>
       </div>
@@ -178,4 +190,4 @@ const Addplant = () => {
   );
 };
 
-export default Addplant;
+export default UpdatePlant;
