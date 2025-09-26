@@ -97,10 +97,10 @@ const Header = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="btn btn-sm btn-outline">
+              <Link to="/login" className="btn hover:bg-[#49A010] btn-sm btn-outline">
                 Login
               </Link>
-              <Link to="/register" className="btn btn-sm btn-outline">
+              <Link to="/register" className="btn hover:bg-[#49A010] btn-sm btn-outline">
                 Register
               </Link>
             </>
@@ -145,7 +145,7 @@ const Header = () => {
                 <>
                   <Link
                     to="/login"
-                    className="btn btn-sm btn-outline whitespace-nowrap"
+                    className="btn  btn-sm btn-outline whitespace-nowrap"
                   >
                     Login
                   </Link>
