@@ -175,7 +175,7 @@ const UpdatePlant = () => {
             <input
               className="btn bg-[#49A010] w-30 hover:bg-green-900 rounded"
               type="submit"
-              value="Add Plant"
+              value="Update Plant"
             />
             <Link
               to={-1}
