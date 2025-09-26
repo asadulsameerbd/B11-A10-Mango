@@ -9,7 +9,7 @@ This is plant care tracker website for plant lover
 - You can Delete or insert your plant
 
 
-  ## 🚀 Technologies Used
+## 🚀 Technologies Used
   - HTML
   - CSS
   - javascript
@@ -17,6 +17,5 @@ This is plant care tracker website for plant lover
   - MongoDB
 
 
-    ##  🗺Screenshot
     
 
