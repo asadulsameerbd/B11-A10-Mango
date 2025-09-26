@@ -1,9 +1,22 @@
-# React + Vite
 
-#Live link : https://b11-a10-76609.web.app/
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Plant Care Tracker Website Live link : https://b11-a10-76609.web.app/
+This is plant care tracker website for plant lover
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features 
+- You can add a new plant
+- You can update your plant
+- You can Delete or insert your plant
+
+
+  ## 🚀 Technologies Used
+  - HTML
+  - CSS
+  - javascript
+  - React
+  - MongoDB
+
+
+    ##  🗺Screenshot
+    
+
