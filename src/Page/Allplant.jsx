@@ -1,9 +1,22 @@
-import { useLoaderData } from "react-router";
+import { useEffect, useState } from "react";
+import Loading from "../Component/Loading";
 import PlantCard from "./PlantCard";
 import PlantRow from "./PlantRow";
 
 const Allplant = () => {
-  const plants = useLoaderData();
+  const [plants, setPlants] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/clients?limit=20")
+      .then(res => res.json())
+      .then(data => {
+        setPlants(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="p-4 md:p-8">
@@ -11,7 +24,7 @@ const Allplant = () => {
         Total Plants : {plants.length}
       </h1>
 
-      {/*  Desktop & Tablet -> Table */}
+      {/* Desktop & Tablet */}
       <div className="hidden md:block overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -23,16 +36,16 @@ const Allplant = () => {
             </tr>
           </thead>
           <tbody>
-            {plants.map((plant) => (
+            {plants.map(plant => (
               <PlantRow key={plant._id} plant={plant} />
             ))}
           </tbody>
         </table>
       </div>
 
-      {/*  Mobile -> Card Layout */}
+      {/* Mobile */}
       <div className="block md:hidden">
-        {plants.map((plant) => (
+        {plants.map(plant => (
           <PlantCard key={plant._id} plant={plant} />
         ))}
       </div>
