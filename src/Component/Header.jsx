@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import Swal from "sweetalert2";
 import "../App.css";
@@ -6,7 +6,7 @@ import logo from "../assets/logo.png";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Header = () => {
-  const { user, setUser, logOut } = use(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
 
   const handleLogout = () => {
@@ -19,7 +19,7 @@ const Header = () => {
         });
       })
       .catch((error) => {
-       Swal.fire({
+        Swal.fire({
           title: error.message,
           icon: "error",
           draggable: true,
@@ -32,9 +32,8 @@ const Header = () => {
       <div className="max-w-[1380px] mx-auto flex navbar justify-between ">
         {/* logo */}
         <Link to={"/"}>
-          {user && user.name}
-          <button className="flex items-center justify-center gap-2">
-            <img className="w-15" src={logo} alt="" />
+          <button className="flex items-center hover:cursor-pointer justify-center gap-2">
+            <img className="w-12" src={logo} alt="logo" />
             <p className="font-semibold text-lg">Pcare</p>
           </button>
         </Link>
@@ -84,42 +83,39 @@ const Header = () => {
 
           {/* Dynamic User */}
           {user ? (
-            <div onClick={() => setOpen(!open)}>
-              <div className="relative">
-                {/* avatar */}
-                <div className="avatar relative">
-                  <div className="group hover:ring-2 ring-primary w-10 rounded-full hover:ring-green-300">
-                    <img
-                      src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-                      alt="User avatar"
-                    />
+            <div className="relative">
+              <div
+                onClick={() => setOpen(!open)}
+                className="cursor-pointer group relative"
+              >
+                {/* Avatar */}
+                <img
+                  src={user.photo || "https://i.ibb.co/YdLkWjT/user.png"}
+                  alt="User avatar"
+                  className="w-10 h-10 rounded-full ring-2 ring-green-400 transition-transform group-hover:scale-110"
+                />
 
-                    {/* email tooltip */}
-                    <div className="absolute w-35 group-hover:opacity-60 opacity-0">
-                      {user.name}
-                    </div>
-                  </div>
+                {/* Tooltip (user name) */}
+                <div className="absolute w-20 -bottom-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-sm px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {user.displayName || "User"}
                 </div>
-
-                {/* if Open  */}
-                {open && (
-                  <div className="absolute right-2 top-18 z-10">
-                    <div className="">
-                      <button
-                        className="btn hover:bg-green-700 bg-green-500 rounded-xl"
-                        type="button"
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
+
+              {/* Dropdown (Logout btn) */}
+              {open && (
+                <div className="absolute right-0 top-12 z-20 bg-white shadow-lg rounded-lg p-2">
+                  <button
+                    className="btn hover:bg-green-700 bg-green-500 rounded-xl w-full text-white"
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             // if user is not available then
-
             <div className="flex gap-5">
               <li>
                 <NavLink
