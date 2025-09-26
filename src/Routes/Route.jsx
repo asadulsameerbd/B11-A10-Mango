@@ -51,14 +51,14 @@ export const router = createBrowserRouter([
         ),
 
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/clients/${params.id}`),
+          fetch(`https://plant-care-server-ten.vercel.app/clients/${params.id}`),
       },
       {
         path: "/updateplant/:id",
         Component: UpdatePlant,
         hydrateFallbackElement: <Loading></Loading>,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/clients/${params.id}`),
+          fetch(`https://plant-care-server-ten.vercel.app/clients/${params.id}`),
       },
       {
         path: "/myplant",

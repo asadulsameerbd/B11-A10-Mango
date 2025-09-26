@@ -8,7 +8,7 @@ const Allplant = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/clients?limit=20")
+    fetch("https://plant-care-server-ten.vercel.app/clients?limit=20")
       .then(res => res.json())
       .then(data => {
         setPlants(data);

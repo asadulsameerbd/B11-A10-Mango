@@ -16,7 +16,7 @@ const Homepage = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/clients?limit=6")
+    fetch("https://plant-care-server-ten.vercel.app/clients?limit=6")
       .then(res => res.json())
       .then(data => {
         setPlants(data);

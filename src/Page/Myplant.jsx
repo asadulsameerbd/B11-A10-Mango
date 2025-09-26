@@ -8,7 +8,7 @@ const MyPlant = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/myplants/${user.email}`)
+      fetch(`https://plant-care-server-ten.vercel.app/myplants/${user.email}`)
         .then((res) => res.json())
         .then((data) => setPlants(data));
     }

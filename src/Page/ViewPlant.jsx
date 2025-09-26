@@ -17,7 +17,7 @@ const ViewPlant = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/clients/${id}`, {
+        fetch(`https://plant-care-server-ten.vercel.app/clients/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

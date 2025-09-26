@@ -18,7 +18,7 @@ const Addplant = () => {
 
     // add formdata to the server database
 
-    fetch("http://localhost:3000/clients", {
+    fetch("https://plant-care-server-ten.vercel.app/clients", {
       method: "POST",
       headers: {
         "content-type": "application/json",

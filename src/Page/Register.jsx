@@ -59,7 +59,7 @@ const Register = () => {
             lastSignInTime: result.user?.metadata?.lastSignInTime,
           };
           // save data in own server
-          fetch("http://localhost:3000/users", {
+          fetch("https://plant-care-server-ten.vercel.app/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",
